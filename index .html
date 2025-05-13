@@ -1,0 +1,525 @@
+<!-- index.html: All-in-One Calculator Website with Tools and Unique Design -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All-in-One Tools</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg, #f0f4ff, #ffe8f0);
+      color: #333;
+    }
+    header {
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    .tool {
+      background: white;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+    .tool:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+    }
+    h2 {
+      margin-top: 0;
+      color: #4a148c;
+    }
+    input, textarea, button, select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    button {
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #2575fc, #6a11cb);
+    }
+    pre, p {
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 8px;
+      border-left: 4px solid #6a11cb;
+    }
+</style>
+</head>
+<body>
+<header>
+  <h1>All-in-One Smart Tools</h1>
+  <p>Useful calculators and tools for everyday life</p>
+</header>
+<div class="container">
+  <!-- AI Resume Generator -->
+  <div class="tool">
+    <h2>AI Resume Generator</h2>
+    <input type="text" id="name" placeholder="Your Full Name">
+    <input type="text" id="email" placeholder="Your Email">
+    <textarea id="summary" placeholder="Professional Summary"></textarea>
+    <textarea id="skills" placeholder="Skills (comma separated)"></textarea>
+    <textarea id="experience" placeholder="Experience (e.g., Job Title at Company)"></textarea>
+    <button onclick="generateResume()">Generate Resume</button>
+    <button onclick="downloadResume()">Download as PDF</button>
+<button onclick="clearResume()">Cut</button>
+    <pre id="resume-output"></pre>
+  </div>
+
+  <!-- BMI Calculator -->
+  <div class="tool">
+    <h2>BMI Calculator</h2>
+    <input type="number" id="bmi-weight" placeholder="Weight in kg">
+    <input type="number" id="bmi-height" placeholder="Height in meters">
+    <button onclick="calculateBMI()">Calculate BMI</button>
+<button onclick="clearBMI()">Cut</button>
+    <p id="bmi-result"></p>
+  </div>
+
+  <!-- Age Calculator -->
+  <div class="tool">
+    <h2>Age Calculator</h2>
+    <input type="date" id="dob">
+    <button onclick="calculateAge()">Calculate Age</button>
+<button onclick="clearAge()">Cut</button>
+    <p id="age-result"></p>
+  </div>
+
+  <!-- Currency Converter -->
+  <div class="tool">
+    <h2>Currency Converter</h2>
+    <input type="number" id="currency-amount" placeholder="Amount in USD">
+    <button onclick="convertCurrency()">Convert to INR</button>
+<button onclick="clearCurrency()">Cut</button>
+    <p id="currency-result"></p>
+  
+  <!-- Sleep Cycle Calculator -->
+  <div class="tool">
+    <h2>Sleep Cycle Calculator</h2>
+    <label>When do you want to wake up?</label>
+    <input type="time" id="wake-time">
+    <button onclick="calculateSleepCycles()">Calculate Sleep Times</button>
+    <button onclick="clearSleep()">Cut</button>
+    <p id="sleep-output"></p>
+  </div>
+
+
+  <!-- Calorie Deficit Calculator -->
+  <div class="tool">
+    <h2>Calorie Deficit Calculator</h2>
+    <input type="number" id="cd-age" placeholder="Age (years)">
+    <input type="number" id="cd-weight" placeholder="Weight in kg">
+    <input type="number" id="cd-height" placeholder="Height (cm)">
+    <select id="cd-activity">
+      <option value="1.2">Sedentary</option>
+      <option value="1.375">Lightly active</option>
+      <option value="1.55">Moderately active</option>
+      <option value="1.725">Very active</option>
+    </select>
+    <button onclick="calculateDeficit()">Calculate</button>
+    <button onclick="clearDeficit()">Cut</button>
+    <p id="cd-result"></p>
+  </div>
+
+
+  <!-- YouTube Thumbnail Downloader -->
+  <div class="tool">
+    <h2>YouTube Thumbnail Downloader</h2>
+    <input type="text" id="yt-url" placeholder="Enter YouTube Video URL">
+    <button onclick="getThumbnail()">Get Thumbnail</button>
+    <button onclick="clearThumbnail()">Cut</button>
+    <div id="thumbnail-output"></div>
+  </div>
+
+
+  <!-- Thumbnail Editor Tool -->
+  <div class="tool">
+    <h2>Thumbnail Editor</h2>
+    <input type="file" id="editor-image-upload" accept="image/*">
+    <input type="text" id="editor-text" placeholder="Enter overlay text">
+    <input type="color" id="text-color" value="#ffffff">
+    <input type="range" id="text-size" min="10" max="80" value="32">
+    <button onclick="drawTextOnImage()">Add Text</button>
+    <button onclick="downloadEditedThumbnail()">Download Edited Thumbnail</button>
+    <button onclick="clearEditorCanvas()">Cut</button>
+    <br><br>
+    <canvas id="editor-canvas" width="640" height="360" style="border:1px solid #ccc; border-radius:12px;"></canvas>
+  </div>
+
+
+  <!-- Indian Mobile Number Locator -->
+  
+
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+  function clearResume() {
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('summary').value = '';
+    document.getElementById('skills').value = '';
+    document.getElementById('experience').value = '';
+    document.getElementById('resume-output').innerText = '';
+  }
+  function clearBMI() {
+    document.getElementById('bmi-weight').value = '';
+    document.getElementById('bmi-height').value = '';
+    document.getElementById('bmi-result').innerText = '';
+  }
+  function clearAge() {
+    document.getElementById('dob').value = '';
+    document.getElementById('age-result').innerText = '';
+  }
+  function clearCurrency() {
+    document.getElementById('currency-amount').value = '';
+    document.getElementById('currency-result').innerText = '';
+  }
+
+</script>
+<script>
+  // Resume Generator
+  function generateResume() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const summary = document.getElementById('summary').value;
+    const skills = document.getElementById('skills').value.split(',');
+    const experience = document.getElementById('experience').value;
+    const resume = `Name: ${name}\nEmail: ${email}\n\nProfessional Summary:\n${summary}\n\nSkills:\n${skills.map(skill => '- ' + skill.trim()).join('\n')}\n\nExperience:\n${experience}`;
+    document.getElementById('resume-output').innerText = resume;
+  }
+  async function downloadResume() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const content = document.getElementById('resume-output').innerText;
+    const lines = content.split("\n");
+    let y = 10;
+    for (let line of lines) {
+      doc.text(line, 10, y);
+      y += 10;
+    }
+    doc.save("resume.pdf");
+  }
+  // BMI Calculator
+  function calculateBMI() {
+    const weight = parseFloat(document.getElementById('bmi-weight').value);
+    const height = parseFloat(document.getElementById('bmi-height').value);
+    if (weight > 0 && height > 0) {
+      const bmi = weight / (height * height);
+      document.getElementById('bmi-result').innerText = `Your BMI is ${bmi.toFixed(2)}`;
+    } else {
+      document.getElementById('bmi-result').innerText = 'Please enter valid values.';
+    }
+  }
+  // Age Calculator
+  function calculateAge() {
+    const dob = new Date(document.getElementById('dob').value);
+    const today = new Date();
+    const age = today.getFullYear() - dob.getFullYear();
+    document.getElementById('age-result').innerText = `Your age is ${age} years.`;
+  }
+  // Currency Converter
+  function convertCurrency() {
+    const usd = parseFloat(document.getElementById('currency-amount').value);
+    const rate = 83;
+    if (!isNaN(usd)) {
+      const inr = usd * rate;
+      document.getElementById('currency-result').innerText = `${usd} USD = ₹${inr.toFixed(2)} INR`;
+    } else {
+      document.getElementById('currency-result').innerText = 'Enter a valid amount';
+    }
+  }
+
+  function clearResume() {
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('summary').value = '';
+    document.getElementById('skills').value = '';
+    document.getElementById('experience').value = '';
+    document.getElementById('resume-output').innerText = '';
+  }
+  function clearBMI() {
+    document.getElementById('bmi-weight').value = '';
+    document.getElementById('bmi-height').value = '';
+    document.getElementById('bmi-result').innerText = '';
+  }
+  function clearAge() {
+    document.getElementById('dob').value = '';
+    document.getElementById('age-result').innerText = '';
+  }
+  function clearCurrency() {
+    document.getElementById('currency-amount').value = '';
+    document.getElementById('currency-result').innerText = '';
+  }
+
+
+  // Sleep Cycle Calculator
+  function calculateSleepCycles() {
+    const wakeTime = document.getElementById("wake-time").value;
+    if (!wakeTime) {
+      document.getElementById("sleep-output").innerText = "Please enter a valid time.";
+      return;
+    }
+    const [hours, minutes] = wakeTime.split(":").map(Number);
+    const wakeDate = new Date();
+    wakeDate.setHours(hours);
+    wakeDate.setMinutes(minutes);
+    const cycles = [6, 5, 4, 3]; // number of cycles (90 mins each)
+
+    const results = cycles.map(cycle => {
+      const sleepTime = new Date(wakeDate.getTime() - cycle * 90 * 60000 - 15 * 60000);
+      return sleepTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    });
+
+    document.getElementById("sleep-output").innerText =
+      "Recommended times to fall asleep:\n" + results.join(", ");
+  }
+  function clearSleep() {
+    document.getElementById("wake-time").value = '';
+    document.getElementById("sleep-output").innerText = '';
+  }
+
+  // Calorie Deficit Calculator
+  function calculateDeficit() {
+    const age = parseInt(document.getElementById('cd-age').value);
+    const weight = parseFloat(document.getElementById('cd-weight').value);
+    const height = parseFloat(document.getElementById('cd-height').value);
+    const activity = parseFloat(document.getElementById('cd-activity').value);
+
+    if (age && weight && height && activity) {
+      const bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+      const maintenance = bmr * activity;
+      const deficit = maintenance - 500;
+      document.getElementById('cd-result').innerText =
+        `Maintenance Calories: ${Math.round(maintenance)} kcal/day\n` +
+        `For Weight Loss: ~${Math.round(deficit)} kcal/day (500 deficit)`;
+    } else {
+      document.getElementById('cd-result').innerText = "Please fill in all fields correctly.";
+    }
+  }
+  function clearDeficit() {
+    document.getElementById('cd-age').value = '';
+    document.getElementById('cd-weight').value = '';
+    document.getElementById('cd-height').value = '';
+    document.getElementById('cd-activity').value = '1.2';
+    document.getElementById('cd-result').innerText = '';
+  }
+
+
+  
+
+
+  
+
+
+  
+
+
+  
+
+
+  
+
+
+  // YouTube Thumbnail Downloader with Title, Qualities & Direct Download via Blob
+  let videoId = "";
+
+  function getThumbnail() {
+    const url = document.getElementById('yt-url').value.trim();
+    const match = url.match(/(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be\.com\/watch\?v=)([\w-]{11})/);
+    const output = document.getElementById('thumbnail-output');
+    if (match && match[1]) {
+      videoId = match[1];
+      const oembedUrl = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`;
+
+      fetch(oembedUrl)
+        .then(response => response.json())
+        .then(data => {
+          const title = data.title;
+          const channel = data.author_name;
+
+          const qualities = [
+            { label: "Max Resolution", value: "maxresdefault.jpg" },
+            { label: "High Quality", value: "hqdefault.jpg" },
+            { label: "Medium Quality", value: "mqdefault.jpg" },
+            { label: "Standard Definition", value: "sddefault.jpg" },
+            { label: "Default (Low)", value: "default.jpg" }
+          ];
+
+          let html = `<p><strong>Video Title:</strong> ${title}<br><strong>Channel:</strong> ${channel}</p>`;
+          qualities.forEach(q => {
+            const thumbUrl = `https://img.youtube.com/vi/${videoId}/${q.value}`;
+            const btnId = `download-${q.value.split('.')[0]}`;
+
+            html += `
+              <div style="margin-bottom: 10px;">
+                <p>${q.label}</p>
+                <img src="${thumbUrl}" alt="${q.label}" style="max-width:100%;border-radius:12px;"><br>
+                <button onclick="downloadImage('${thumbUrl}', '${q.value}')" style="margin-top:5px;">Download ${q.label}</button>
+              
+  <!-- Text to Emoji Translator -->
+  <div class="tool">
+    <h2>Text to Emoji Translator</h2>
+    <textarea id="emoji-input" placeholder="Enter your text here..."></textarea>
+    <button onclick="translateToEmoji()">Translate</button>
+    <button onclick="clearEmoji()">Cut</button>
+    <p id="emoji-output"></p>
+  </div>
+</div>
+            `;
+          });
+
+          output.innerHTML = html;
+        })
+        .catch(err => {
+          output.innerHTML = "<p>Failed to fetch video details.</p>";
+        });
+    } else {
+      output.innerHTML = "<p>Please enter a valid YouTube URL.</p>";
+    }
+  }
+
+  function downloadImage(url, filename) {
+    fetch(url)
+      .then(response => response.blob())
+      .then(blob => {
+        const blobUrl = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
+      })
+      .catch(() => alert("Failed to download image."));
+  }
+
+  function clearThumbnail() {
+    document.getElementById('yt-url').value = '';
+    document.getElementById('thumbnail-output').innerHTML = '';
+    videoId = "";
+  }
+
+
+  // Thumbnail Editor Tool Logic
+  const canvas = document.getElementById('editor-canvas');
+  const ctx = canvas.getContext('2d');
+  let uploadedImage = null;
+
+  document.getElementById('editor-image-upload').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const img = new Image();
+      img.onload = function () {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+        uploadedImage = img;
+      };
+      img.src = event.target.result;
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  });
+
+  function drawTextOnImage() {
+    if (!uploadedImage) return;
+    const text = document.getElementById('editor-text').value;
+    const color = document.getElementById('text-color').value;
+    const size = parseInt(document.getElementById('text-size').value);
+
+    ctx.drawImage(uploadedImage, 0, 0); // Reset image
+    ctx.font = `${size}px Arial`;
+    ctx.fillStyle = color;
+    ctx.fillText(text, 20, 50);
+  }
+
+  function downloadEditedThumbnail() {
+    const link = document.createElement('a');
+    link.download = 'edited-thumbnail.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  }
+
+  function clearEditorCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    uploadedImage = null;
+    document.getElementById('editor-image-upload').value = '';
+    document.getElementById('editor-text').value = '';
+  }
+
+
+  
+
+
+  
+
+
+  
+
+
+  
+
+
+  
+
+
+  
+
+
+  // Text to Emoji Translator
+  function translateToEmoji() {
+    const text = document.getElementById("emoji-input").value.toLowerCase();
+    let emojiText = text
+      .replace(/love/g, "❤️")
+      .replace(/happy/g, "😊")
+      .replace(/sad/g, "😢")
+      .replace(/fire/g, "🔥")
+      .replace(/cool/g, "😎")
+      .replace(/ok/g, "👌")
+      .replace(/star/g, "⭐")
+      .replace(/idea/g, "💡")
+      .replace(/money/g, "💰")
+      .replace(/food/g, "🍔")
+      .replace(/coffee/g, "☕")
+      .replace(/sleep/g, "😴");
+
+    document.getElementById("emoji-output").innerText = emojiText || "No recognizable emoji found.";
+  }
+
+  function clearEmoji() {
+    document.getElementById("emoji-input").value = '';
+    document.getElementById("emoji-output").innerText = '';
+  }
+</script>
+</body>
+</html>
